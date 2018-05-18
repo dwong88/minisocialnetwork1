@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Article;
+use Auth;
+use DB;
 
 class ArticlesController extends Controller
 {
@@ -14,6 +17,16 @@ class ArticlesController extends Controller
     public function index()
     {
         //
+        $articles = Article::all();
+        //$article = Article::whereLive(1)->get();
+        //$article = DB::table('articles')->get();
+
+        //$article = DB::table('articles')->whereLive(1)->get()->first();
+        //dd($article);
+
+
+        //return $articles;
+        return view('articles.index',compact('articles'));
     }
 
     /**
@@ -36,7 +49,27 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         //
-        return $request->all();
+        /*$article = new Article;
+        $article->user_id = Auth::user()->id;
+        $article->content = $request->content;
+        $article->live = (boolean)$request->live;
+        $article->post_on = $request->post_on;
+        $article->save();*/
+
+        //DB::table('articles')->insert($request->all()); #query builder
+        //DB::table('articles')->insert($request->except('_token')); #query builder
+
+        Article::create($request->all());
+        /*
+        Article::create([
+            'user_id'=>Auth::user()->id,
+            'content'=>$request->content,
+            'live'=>$request->live,
+            'post_on'=>$request->post_on
+          ]);
+          */
+
+        //return $request->all();
     }
 
     /**
@@ -48,6 +81,9 @@ class ArticlesController extends Controller
     public function show($id)
     {
         //
+        $article = Article::find($id);
+        //return $article;
+        return view('articles.show',compact('article'));
     }
 
     /**

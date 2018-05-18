@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="app">
@@ -50,6 +51,14 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                  <a class="dropdown-item" href="/home">Home
+                                  </a>
+                                  <a class="dropdown-item" href="/profile/{{Auth::user()->username}}">Profile
+                                  </a>
+                                  <a class="dropdown-item" href="/articles/create">Create Articles
+                                  </a>
+                                  <hr>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
